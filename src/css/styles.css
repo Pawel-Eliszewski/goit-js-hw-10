@@ -31,6 +31,10 @@ p {
   align-items: center;
 }
 
+b {
+  margin-right: 4px;
+}
+
 .country-list {
   padding: 0;
 }

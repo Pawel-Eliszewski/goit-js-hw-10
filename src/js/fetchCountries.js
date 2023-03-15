@@ -8,6 +8,8 @@ const countryInfo = document.querySelector('.country-info');
 countryInput.addEventListener(
   'input',
   debounce(() => {
+    countryList.innerHTML = '';
+    countryInfo.innerHTML = '';
     if (countryInput.value !== '') {
       fetchCountries()
         .then(name => renderCountries(name))
@@ -33,8 +35,6 @@ function fetchCountries() {
 
 function renderCountries(name) {
   if (name.length >= 10) {
-    countryInfo.innerHTML = '';
-    countryList.innerHTML = '';
     Notiflix.Notify.info(
       'Too many matches found. Please enter a more specific name.'
     );
@@ -42,25 +42,22 @@ function renderCountries(name) {
     const list = name
       .map(({ name, flags }) => {
         return `<li>
-            <p><img src="${flags.svg}"></img>  ${name.official}</p>
+            <p><img src="${flags.svg}"></img>${name.official}</p>
               </li>`;
       })
       .join('');
+    countryInfo.innerHTML = '';
     countryList.innerHTML = list;
-    countryInfo.innerHTML = '';
-  } else if (name === '') {
-    countryInfo.innerHTML = '';
-    countryList.innerHTML = '';
   } else {
     countryList.innerHTML = '';
     const info = name
       .map(({ name, capital, population, flags, languages }) => {
         const lang = Object.values(languages);
         return `<li>
-      <p><img src="${flags.svg}"></img>  <b class="name">${name.official}</b></p>
-      <p><b>Capital: </b>${capital}</p>
-      <p><b>Population: </b>${population}</p>
-      <p><b>Languages: </b>${lang}</p>
+      <p><img src="${flags.svg}"></img><b class="name">${name.official}</b></p>
+      <p><b>Capital:</b>${capital}</p>
+      <p><b>Population:</b>${population}</p>
+      <p><b>Languages:</b>${lang}</p>
       </li>`;
       })
       .join('');
