@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-  list-style: none;
 }
 
 body {
@@ -39,6 +38,22 @@ b {
   padding: 0;
 }
 
+li {
+  list-style: none;
+  cursor: pointer;
+}
+
 .name {
   font-size: 20px;
+}
+
+.is-hidden {
+  visibility: hidden;
+  display: none;
+}
+
+.visible {
+  cursor: default;
+  visibility: visible;
+  display: block;
 }
